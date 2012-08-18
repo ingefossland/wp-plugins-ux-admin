@@ -1,0 +1,19 @@
+#geocoder-display {
+	position: relative;
+}
+
+#geocoder-map {
+   width: 100%;
+   height: 400px; /* If you change this don't forget to change the crosshair position to match */
+}
+
+#geocoder-crosshair {
+    position: absolute;
+    top: 192px;
+    height: 19px;
+    width: 19px;
+    left: 50%;
+    margin-left: -8px;
+    display: block;
+	background:url(data:image/gif;base64,R0lGODlhEwATAKEBAAAAAP///////////yH5BAEKAAIALAAAAAATABMAAAIwlI+pGhALRXuRuWopPnOj7hngEpRm6ZymAbTuC7eiitJlNHr5tmN99cNdQpIhsVIAADs%3D) center center no-repeat;
+}

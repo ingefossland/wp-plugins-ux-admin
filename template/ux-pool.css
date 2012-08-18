@@ -1,0 +1,103 @@
+/* POOL */
+
+.ux-pool {
+	width: 100%;
+}
+
+/* items */
+
+.ux-pool-items {
+	border-top: 1px solid #ddd;
+}
+
+.ux-pool-items .ux-pool-action .add {
+	display: none;
+}
+
+/* empty */
+
+.ux-pool-empty {
+	height: 37px;
+	display: block;
+	font-size: 12px;
+	line-height: 36px;
+	padding: 0 10px;
+	background: #ccf3fa; 
+	display: none;
+}
+
+/* query */
+
+.ux-pool-query {
+	border-top: 1px solid #ddd;
+}
+
+.ux-pool-query .ux-pool-order,
+.ux-pool-query .ux-pool-action .remove {
+	display: none;
+}
+
+/* item */
+
+.ux-pool-item {
+	display: block;
+	width: 100%;
+	height: 36px;
+	border-bottom: 1px solid #ddd;
+/*	white-space: nowrap; 
+	overflow: hidden; */
+}
+
+.ux-pool-placeholder {
+	width: 100%;
+	height: 37px;
+	display: block;
+	background: #ccf3fa;
+}
+
+.ux-pool-handle {
+	width: 100%;
+	height: 37px;
+	cursor: move;
+}
+
+.ux-pool-thumbnail {
+	float: left;
+	width: 40px;
+	height: 32px;
+	margin: 2px 0;
+}
+
+.ux-pool-thumbnail img {
+	width: auto;
+	height: 32px;
+}
+
+.ux-pool-order {
+	float: left;	
+	padding: 5px 0;
+}
+
+.ux-pool-meta {
+	float: left;
+	padding: 5px 0;
+}
+
+.ux-pool-description {
+	float: left;
+	font-size: 12px;
+	line-height: 36px;
+	padding: 0 10px;
+}
+
+.ux-pool-description em {
+	font-size: 11px;
+	font-style: normal;
+}
+
+.ux-pool-action {
+	float: right;
+	font-size: 12px;
+	line-height: 36px;
+	padding: 0 10px;
+}
