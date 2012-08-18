@@ -1,12 +1,9 @@
 <div class="wrap">
 <h2>UX admin settings</h2>
-
 <form action="options.php" method="post">
     <?php settings_fields('ux-admin'); ?>
-
 	<h3><label for="ux-geocoder-gmap_api_key">Google Maps API key</label></h3>
 	<p>Please enter a valid Google Maps API key for <?php echo get_option('home'); ?>/. (<a href="https://developers.google.com/maps/documentation/javascript/">Sign up for the Google Maps API.</a>)</p>
-	
 <table class="form-table">
 <tbody>
 <tr valign="top">
@@ -20,10 +17,8 @@
 <p class="description">The Google Maps Javascript API Version 3 is now the official Javascript API.</p></td>
 </tr>
 </tbody></table>
-
     <p class="submit">
     <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
     </p>
-
 </form>
 </div>
