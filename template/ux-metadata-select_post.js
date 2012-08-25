@@ -18,9 +18,12 @@ jQuery(document).ready(function($) {
 
 		var input = $('#'+item_id+' .post_title');
 		var output = $('#'+item_id+' .suggest');
+
+		// ajax source
+		var ajax_query = ajax_url + '?post_id=' + post_id + '&post_title=' + post_title + '&post_type=' + post_type;
 		
 		$(input).autocomplete({
-			source: ajax_url,
+			source: ajax_query,
 			appendTo: output,
 			minLength: 2,
 			autoFocus: true,
@@ -35,7 +38,7 @@ jQuery(document).ready(function($) {
 		});
 
 	}
-	
+
 	// select relation update
 	function ux_metadata_select_post_update(item_id, selected_id, selected_value) {
 		

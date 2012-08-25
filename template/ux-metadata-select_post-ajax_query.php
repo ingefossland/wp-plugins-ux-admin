@@ -5,7 +5,9 @@
 	global $wpdb;
 
 	// query
-	$term = $_REQUEST['term'];
+	// $post_id = $_REQUEST['post_id'];
+	$post_title = $_REQUEST['post_title'];
+	$post_type = $_REQUEST['post_type'];
 	
 	// query posts
 	if ($post_type) {
@@ -19,9 +21,9 @@
 				OR $wpdb->posts.post_status = 'draft'
 			)
 			AND (
-				$wpdb->posts.post_title LIKE '%$term%'
-				OR $wpdb->posts.post_excerpt LIKE '%$term%'
-				OR $wpdb->posts.post_content LIKE '%$term%'
+				$wpdb->posts.post_title LIKE '%$post_title%'
+				OR $wpdb->posts.post_excerpt LIKE '%$post_title%'
+				OR $wpdb->posts.post_content LIKE '%$post_title%'
 			)
 			ORDER BY $wpdb->posts.post_title ASC
 			LIMIT 10
@@ -38,9 +40,9 @@
 				OR $wpdb->posts.post_status = 'draft'
 			)
 			AND (
-				$wpdb->posts.post_title LIKE '%$term%'
-				OR $wpdb->posts.post_excerpt LIKE '%$term%'
-				OR $wpdb->posts.post_content LIKE '%$term%'
+				$wpdb->posts.post_title LIKE '%$post_title%'
+				OR $wpdb->posts.post_excerpt LIKE '%$post_title%'
+				OR $wpdb->posts.post_content LIKE '%$post_title%'
 			) 
 			ORDER BY $wpdb->posts.post_title ASC
 			LIMIT 10
@@ -58,6 +60,10 @@
 	// clear input
 	$posts[$new_id]->id = '0';
 	$posts[$new_id]->value = '- Clear';
+
+	// debug
+	$posts[$new_id+1]->id = '0';
+	$posts[$new_id+1]->value = $post_title . ' (' .$post_type. ')';
 
 	// encode to json
 	$output = json_encode($posts);
