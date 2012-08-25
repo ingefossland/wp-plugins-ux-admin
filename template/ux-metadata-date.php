@@ -52,6 +52,10 @@ if (empty($sec)) {
 
 <input type="hidden" class="meta_value" name="ux-meta[<?php echo $post_id; ?>][<?php echo $meta_key; ?>]" value="<?php echo $meta_value; ?>" id="ux-meta-<?php echo $meta_key; ?>" />
 
+<?php if ($meta_label) { ?>
+<h4><label for="ux-meta-<?php echo $meta_key; ?>"><?php echo $meta_label; ?> <em>(<?php echo $meta_key; ?>)</em></label></h4>
+<?php } ?>
+
 <select class="month" name=\"_month\">
 
 <?php for ($i = 1; $i < 13; $i++) { ?>

@@ -26,7 +26,11 @@ $geo_zoom_value = get_post_meta($post_id, $meta_key . '-zoom', true);
 
 <span class="ux-geocoder" id="ux-geocoder-<?php echo $meta_key; ?>">
 
+<?php if ($meta_label) { ?>
+<h4><label for="<?php echo $geo_input; ?>"><?php echo $meta_label; ?> <em>(<?php echo $geo_input; ?>)</em></label></h4>
+<?php } else { ?>
 <h4><label for="<?php echo $geo_input; ?>"><strong>Input location</strong> <em>(<?php echo $geo_input; ?>)</em></label></h4>
+<?php } ?>
 
 <div id="geocoder">
 	<p>

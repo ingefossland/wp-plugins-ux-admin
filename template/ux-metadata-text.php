@@ -25,6 +25,10 @@ $meta_value = get_post_meta($post_id, $meta_key, true);
 
 ?>
 
+<?php if ($meta_label) { ?>
+<h4><label for="ux-meta-<?php echo $meta_key; ?>"><?php echo $meta_label; ?> <em>(<?php echo $meta_key; ?>)</em></label></h4>
+<?php } ?>
+
 <?php if (isset($rows) && $rows > 1) { ?>
 <textarea class="ux-textarea" name="ux-meta[<?php echo $post_id; ?>][<?php echo $meta_key; ?>]" id="ux-meta-<?php echo $meta_key; ?>" cols="<?php echo $cols; ?>" rows="<?php echo $rows; ?>"/><?php echo $meta_value; ?></textarea>
 <?php } else { ?>
