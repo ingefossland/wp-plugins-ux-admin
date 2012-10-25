@@ -39,7 +39,7 @@ class ux_admin {
 		
 		// add library scripts and styles
 		wp_enqueue_style('jquery-autocomplete', plugins_url('/lib/jquery.ui.autocomplete.css', __FILE__));
-		wp_enqueue_script('jquery-autocomplete', plugins_url('/lib/jquery.ui.autocomplete.min.js', __FILE__), array('jquery', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-widget'));
+		wp_enqueue_script('jquery-autocomplete', plugins_url('/lib/jquery.ui.autocomplete.min.js', __FILE__), array('jquery', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-sortable', 'jquery-ui-widget'));
 
 		// get google maps key
 		$gmap_api_key = get_option("ux-geocoder-gmap_api_key");
