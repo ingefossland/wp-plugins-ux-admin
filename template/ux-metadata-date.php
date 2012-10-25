@@ -8,9 +8,29 @@ $this->add_template(array(
 	'meta_key' => 'example_date'
 ));
 
+// ADD SETTINGS
+
+$this->add_template(array(
+	'template' => 'ux-metadata-date.php',
+	'settings_key' => 'date_settings_key',
+));
+
 */
 
-$meta_value = get_post_meta($post_id, $meta_key, true);
+if ($settings_key) {
+
+	$meta_id = 'ux-meta-' . $settings_key;
+	$meta_key = $settings_key;
+	$meta_name = $settings_key;
+	$meta_value = get_option($settings_key);
+
+} else {
+
+	$meta_id = 'ux-meta-' . $meta_key;
+	$meta_name = 'ux-meta['.$post_id.']['.$meta_key.']';
+	$meta_value = get_post_meta($post_id, $meta_key, true);
+	
+}
 
 global $wp_locale;
 
@@ -48,12 +68,12 @@ if (empty($sec)) {
 
 ?>
 
-<span class="ux-date" id="ux-date-<?php echo $meta_key; ?>">
+<span class="ux-date" id="<?php echo $meta_id; ?>">
 
-<input type="hidden" class="meta_value" name="ux-meta[<?php echo $post_id; ?>][<?php echo $meta_key; ?>]" value="<?php echo $meta_value; ?>" id="ux-meta-<?php echo $meta_key; ?>" />
+<input type="hidden" class="meta_value" name="<?php echo $meta_name; ?>" value="<?php echo $meta_value; ?>" id="<?php echo $meta_id; ?>" />
 
 <?php if ($meta_label) { ?>
-<h4><label for="ux-meta-<?php echo $meta_key; ?>"><?php echo $meta_label; ?> <em>(<?php echo $meta_key; ?>)</em></label></h4>
+<h4><label for="<?php echo $meta_id; ?>"><?php echo $meta_label; ?> <em>(<?php echo $meta_key; ?>)</em></label></h4>
 <?php } ?>
 
 <select class="month" name=\"_month\">
