@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
 			items: 'tr',
 			forceHelperSizeType: true,
 			forcePlaceholderSizeType: true,
-			placeholder: 'placeholder',
+			placeholder: 'sortable-placeholder',
 			opacity: 0.5,
 			axis: 'y',
 			distance: 2,

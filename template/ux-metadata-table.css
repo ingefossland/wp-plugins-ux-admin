@@ -17,7 +17,12 @@
 .ux-table table thead th {
 	border-top: 1px solid #DFDFDF;
 	background: #F1F1F1;
+	background: #F9F9F9;
 	font-weight: bold;
+}
+
+.ux-table table tbody tr {
+	cursor: move;
 }
 
 .ux-table table tbody td,
@@ -31,10 +36,10 @@
 
 .ux-table table tbody td.remove {
 	width: 5%;
+	padding-left: 0;
 }
 
-
-.ux-table .placeholder {
+.ux-table .sortable-placeholder {
 	content: '<td></td>';
 	width: 100%;
 	height: 40px;
@@ -42,6 +47,6 @@
 	background: green;
 }
 
-.ux-table .placeholder td {
-	background: red;
+.ux-table .sortable-placeholder td {
+	background: 
 }
