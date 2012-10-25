@@ -27,7 +27,8 @@ jQuery(document).ready(function($) {
 		// make sortable and update on change
 		$('#'+meta_id+' .ux-list-rows').sortable({
 			items: '.ux-list-row',
-			placeholder: 'placeholder',
+			placeholder: 'ux-list-placeholder',
+			handle: '.ux-list-handle',
 			axis: 'y',
 			distance: 2,
 			stop: function(e, ui) {
