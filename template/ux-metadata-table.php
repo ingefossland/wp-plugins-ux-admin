@@ -7,6 +7,11 @@ $this->add_template(array(
 	'post_id' => $post->ID,
 	'meta_key' => 'example_table',
 	'cols' => 3,
+	'labels' => array(
+		'Col 1',
+		'Col 2',
+		'Col 3',
+	)
 ));
 
 // ADD SETTINGS
@@ -15,6 +20,11 @@ $this->add_template(array(
 	'template' => 'ux-metadata-table.php',
 	'settings_key' => 'x',
 	'cols' => 3,
+	'labels' => array(
+		'Col 1',
+		'Col 2',
+		'Col 3',
+	)
 ));
 
 */
@@ -75,6 +85,8 @@ if ($settings_key) {
 </tr>
 <?php } ?>
 </tbody>
+
+</table>
 
 
 </div>
