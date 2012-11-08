@@ -37,24 +37,56 @@
 		$query_exclude = $post_id; // exclude current id
 	}
 
-	// query posts
-	$posts = $wpdb->get_results("
-		SELECT DISTINCT(ID), post_title FROM $wpdb->posts 
-		WHERE $wpdb->posts.post_type = '$post_type'
-		AND (
-			$wpdb->posts.post_status = 'publish'
-			OR $wpdb->posts.post_status = 'draft'
-		)
-		AND $wpdb->posts.ID NOT IN ($query_exclude) 
-		AND (
-			$wpdb->posts.post_title LIKE '%$query_search%'
-			OR $wpdb->posts.post_excerpt LIKE '%$query_search%'
-			OR $wpdb->posts.post_content LIKE '%$query_search%'
-		)
-		ORDER BY $wpdb->posts.post_title ASC
-		LIMIT 10
-		", 
-	OBJECT);	
+	// query posts for use with wpml
+	if (ICL_LANGUAGE_CODE) {	
+
+		$wpdb->translations = $wpdb->prefix . 'icl_translations';
+
+		$posts = $wpdb->get_results("
+			SELECT DISTINCT(ID), post_title FROM $wpdb->posts 
+			LEFT JOIN $wpdb->translations AS translations ON (
+				$wpdb->posts.ID = translations.element_id
+			)
+			WHERE $wpdb->posts.post_type = '$post_type'
+			AND (
+				$wpdb->posts.post_status = 'publish'
+				OR $wpdb->posts.post_status = 'draft'
+			)
+			AND $wpdb->posts.ID NOT IN ($query_exclude) 
+			AND (
+				$wpdb->posts.post_title LIKE '%$query_search%'
+				OR $wpdb->posts.post_excerpt LIKE '%$query_search%'
+				OR $wpdb->posts.post_content LIKE '%$query_search%'
+			)
+			AND translations.element_type = 'post_speaker'
+			AND translations.language_code != 'en'
+			ORDER BY $wpdb->posts.post_title ASC
+			LIMIT 10
+			", 
+		OBJECT);	
+
+	// regular query posts
+	} else {
+
+		$posts = $wpdb->get_results("
+			SELECT DISTINCT(ID), post_title FROM $wpdb->posts 
+			WHERE $wpdb->posts.post_type = '$post_type'
+			AND (
+				$wpdb->posts.post_status = 'publish'
+				OR $wpdb->posts.post_status = 'draft'
+			)
+			AND $wpdb->posts.ID NOT IN ($query_exclude) 
+			AND (
+				$wpdb->posts.post_title LIKE '%$query_search%'
+				OR $wpdb->posts.post_excerpt LIKE '%$query_search%'
+				OR $wpdb->posts.post_content LIKE '%$query_search%'
+			)
+			ORDER BY $wpdb->posts.post_title ASC
+			LIMIT 10
+			", 
+		OBJECT);	
+		
+	}
 	
 	if ($posts) {
 		foreach ($posts as $item) {

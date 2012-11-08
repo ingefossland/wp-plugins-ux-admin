@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
 	function ux_pool_query(pool_id, data) {
 		// refresh query area
 		$('#'+pool_id+' .ux-pool-query').html(data);
-		
+
 		// get query items
 		var items = $('#'+pool_id+' .ux-pool-query .ux-pool-item');
 		items.each(function(i){
