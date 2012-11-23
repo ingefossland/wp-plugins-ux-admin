@@ -38,7 +38,7 @@
 	}
 
 	// query posts for use with wpml
-	if (ICL_LANGUAGE_CODE) {	
+	if (ICL_LANGUAGE_CODE == 'en' || ICL_LANGUAGE_CODE == 'nb') {	
 
 		$wpdb->translations = $wpdb->prefix . 'icl_translations';
 
