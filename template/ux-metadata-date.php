@@ -32,39 +32,26 @@ if ($settings_key) {
 	
 }
 
+// wp locale
 global $wp_locale;
 
+// set default
+if (!$meta_value && $default == 'now') {
+	$time_adj = current_time('timestamp');
+	$meta_value = gmdate('Y-m-d H:i:00', $time_adj);
+} else if (!$meta_value && $default == 'today') {
+	$time_adj = current_time('timestamp');
+	$meta_value = gmdate('Y-m-d 00:00:00', $time_adj);
+} else if (!$meta_value) {
+	$meta_value = '0000-00-00 00:00:00';
+}
+
+// split date
 $year = substr($meta_value, 0, 4);
 $month = substr($meta_value, 5, 2);
 $day = substr($meta_value, 8, 2);
 $hour = substr($meta_value, 11, 2);
 $min = substr($meta_value, 14, 2);
-
-$time_adj = current_time('timestamp');
-
-if (empty($month)) {
-	$month = gmdate('m', $time_adj);
-}
-
-if (empty($day)) {
-	$day = gmdate('d', $time_adj);
-}
-
-if (empty($year)) {
-	$year = gmdate('Y', $time_adj);
-}
-
-if (empty($hour)) {
-	$hour = gmdate('H', $time_adj);
-}
-
-if (empty($min)) {
-	$min = '00';
-}
-
-if (empty($sec)) {
-	$sec = '00';
-}
 
 ?>
 
@@ -78,6 +65,8 @@ if (empty($sec)) {
 
 <select class="month" name=\"_month\">
 
+<option value="00">--</option>
+
 <?php for ($i = 1; $i < 13; $i++) { ?>
 	<?php if ($i == $month) { ?>
         <option value="<?php echo zeroise($i, 2) ?>" selected="selected"><?php echo $wp_locale->get_month_abbrev($wp_locale->get_month($i)); ?></option>
@@ -89,10 +78,21 @@ if (empty($sec)) {
 </select>
 
 <input type="text" class="day" name="_day" value="<?php echo $day; ?>" size="2" maxlength="2" />,
-<input type="text" class="year" name="_year" value="<?php echo $year; ?>" size="4" maxlength="4" /> @
+<input type="text" class="year" name="_year" value="<?php echo $year; ?>" size="4" maxlength="4" /> 
+
+<?php if ($time_format == 'hidden') { ?>
+
+<input type="hidden" class="hour" name="_hour" value="00" size="2" maxlength="2"/>
+<input type="hidden" class="minute" name="_minute" value="00" size="2" maxlength="2" />
+
+<?php } else { ?>
+
+@
 
 <input type="text" class="hour" name="_hour" value="<?php echo $hour; ?>" size="2" maxlength="2"/> :
 <input type="text" class="minute" name="_minute" value="<?php echo $min; ?>" size="2" maxlength="2" />
+
+<?php }  ?>
 
 <span class="display"></span>
 

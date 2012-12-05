@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
 			} else if (day >= 10 && day <= 31) {
 				day = day;
 			} else {
-				day = "01";
+				day = "00";
 			}
 
 			$('#'+date_id+' input.day').val(day);
@@ -107,10 +107,6 @@ jQuery(document).ready(function($) {
 		var hour = $('#'+date_id+' input.hour').val();
 		var minute = $('#'+date_id+' input.minute').val();
 
-		// set value
-		var meta_value = year+'-'+month+'-'+day+' '+hour+':'+minute+':00';
-		$('#'+date_id+' .meta_value').val(meta_value);
-		
 		// set display value
 		var date = new Date(year, month-1, day);
 		
@@ -130,11 +126,37 @@ jQuery(document).ready(function($) {
 		} else if (weekday == 6) {
 			weekday_txt = 'Saturday';
 		}
+	
+		// year not set
+		if (year == '0000') {
+			var display_value = 'Date not set';
+			var meta_value = '0000-00-00 00:00';
+
+		// month not set
+		} else if (month == '00') {
+			var display_value = 'Date set to: '+year;
+			var meta_value = year+'-00-00 00:00';
 		
-		var display_value = weekday_txt+', ' +month_txt+' '+day_txt+', '+year+' @ '+hour+':'+minute;
+		// day not set
+		} else if (day == '00') {
+			var display_value = 'Date set to: '+month_txt+', '+year;
+			var meta_value = year+'-'+month+'-00 00:00';
+
+		// hidden time
+		} else if ($('#'+date_id+' input.hour').attr('type') == 'hidden') {
+			var display_value = 'Date set to: '+month_txt+' '+day_txt+', '+year;
+			var meta_value = year+'-'+month+'-'+day+' 00:00';
 		
+		// full time
+		} else {
+			var display_value = weekday_txt+', ' +month_txt+' '+day_txt+', '+year+' @ '+hour+':'+minute;
+			var meta_value = year+'-'+month+'-'+day+' '+hour+':'+minute+':00';
+		}
+		
+		// set value
 		$('#'+date_id+' .display').html(display_value);
-		
+		$('#'+date_id+' .meta_value').val(meta_value);
+			
 	}
 
 });
