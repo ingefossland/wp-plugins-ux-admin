@@ -88,7 +88,7 @@ class ux_admin {
 
 		// export options array as variables
 		if ($options) { extract($options, EXTR_SKIP); }
-
+		
 		// add template if found
 		if ($template && file_exists(WP_PLUGIN_DIR. '/ux-admin/template/' . $template)) {
 			include('template/'.$template);
