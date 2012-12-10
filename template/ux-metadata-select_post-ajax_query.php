@@ -5,9 +5,14 @@
 	global $wpdb;
 
 	// query
-	// $post_id = $_REQUEST['post_id'];
+	//$post_id = $_REQUEST['post_id'];
 	$post_title = $_REQUEST['post_title'];
 	$post_type = $_REQUEST['post_type'];
+
+	// post type
+	if ($post_type) {
+		$post_type_query = "$wpdb->posts.post_type = '$post_type'"; 
+	}	
 	
 	// query posts
 	if ($post_type) {
@@ -62,8 +67,8 @@
 	$posts[$new_id]->value = '- Clear';
 
 	// debug
-	$posts[$new_id+1]->id = '0';
-	$posts[$new_id+1]->value = $post_title . ' (' .$post_type. ')';
+//	$posts[$new_id+1]->id = '0';
+//	$posts[$new_id+1]->value = $post_title . ' (' .$post_type. ')';
 
 	// encode to json
 	$output = json_encode($posts);

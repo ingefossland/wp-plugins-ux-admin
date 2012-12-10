@@ -38,12 +38,13 @@
 	}
 
 	// query posts for use with wpml
-	if (ICL_LANGUAGE_CODE == 'en' || ICL_LANGUAGE_CODE == 'nb') {	
+	if (ICL_LANGUAGE_CODE == 'en' || ICL_LANGUAGE_CODE == 'nb') {	
 
 		$wpdb->translations = $wpdb->prefix . 'icl_translations';
 
 		$posts = $wpdb->get_results("
-			SELECT DISTINCT(ID), post_title FROM $wpdb->posts 
+			SELECT DISTINCT(ID), post_title
+			FROM $wpdb->posts 
 			LEFT JOIN $wpdb->translations AS translations ON (
 				$wpdb->posts.ID = translations.element_id
 			)
@@ -58,7 +59,7 @@
 				OR $wpdb->posts.post_excerpt LIKE '%$query_search%'
 				OR $wpdb->posts.post_content LIKE '%$query_search%'
 			)
-			AND translations.element_type = 'post_speaker'
+			AND translations.element_type = 'post_$post_type'
 			AND translations.language_code != 'en'
 			ORDER BY $wpdb->posts.post_title ASC
 			LIMIT 10
@@ -69,7 +70,8 @@
 	} else {
 
 		$posts = $wpdb->get_results("
-			SELECT DISTINCT(ID), post_title FROM $wpdb->posts 
+			SELECT DISTINCT(ID), post_title
+			FROM $wpdb->posts 
 			WHERE $wpdb->posts.post_type = '$post_type'
 			AND (
 				$wpdb->posts.post_status = 'publish'
@@ -107,7 +109,7 @@
 			
 		}
 	} else {
-		echo '<p>No result ('.$post_type.').</p>';
+		echo '<p>No result ('.$post_type.')</p>';
 	}
 		
 ?>
