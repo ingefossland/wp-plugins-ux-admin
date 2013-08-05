@@ -32,7 +32,7 @@ if ($item->post_parent) {
 <div class="ux-pool-item" id="ux-pool-<?php echo $meta_key; ?>-item-<?php echo $item_id; ?>">
 	<div class="ux-pool-handle">
         <div class="ux-pool-order"><input type="text" name="ux-pool[<?php echo $item_id; ?>][menu_order]" value="<?php echo $item->menu_order; ?>" size="3" disabled="disabled" class="ux-pool-item-order" /></div>
-		<div class="ux-pool-description"><strong><?php echo $item->post_title; ?></strong> (<?php echo $h_time; ?>) <?php echo $item->parent; ?></div>
+		<div class="ux-pool-description"><strong><?php echo $item->post_title; ?></strong> (<?php echo $h_time; ?>) <?php echo $item->parent; ?> <?php echo $item->lang; ?></div>
 		<div class="ux-pool-action"><a href="#" class="add">Add</a> <a href="#" class="remove">Remove</a></div>
 	</div>
 </div>

@@ -7,6 +7,7 @@ $this->add_template(array(
 	'post_id' => $post->ID,
 	'meta_key' => 'example_pool',
 	'post_type' => 'post',
+	'post_lang' => 'en',
 
 	// make yer own stuff
 	'ajax_url' => 'wp-content/plugins/ux-admin/template/ux-pool-query.php',
@@ -29,6 +30,7 @@ $meta_value = get_post_meta($post_id, $meta_key, true);
 
 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>" />
 <input type="hidden" name="post_type" value="<?php echo $post_type; ?>" />
+<input type="hidden" name="post_language" value="<?php echo $post_language; ?>" />
 <input type="hidden" name="meta_key" value="<?php echo $meta_key; ?>" />
 <input type="hidden" name="item_template" value="<?php echo $item_template; ?>" />
 

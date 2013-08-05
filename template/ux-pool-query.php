@@ -18,6 +18,9 @@
 	// post type
 	$post_type = $_REQUEST['post_type'];
 
+	// post language
+	$post_language = $_REQUEST['post_language'];
+
 	// item template
 	$item_template = $_REQUEST['item_template'];
 
@@ -38,8 +41,8 @@
 	}
 
 	// query posts for use with wpml
-	if (ICL_LANGUAGE_CODE == 'en' || ICL_LANGUAGE_CODE == 'nb') {	
-
+	//if (ICL_LANGUAGE_CODE == 'en' || ICL_LANGUAGE_CODE == 'nb') {	
+	if ($post_language == 'nb') {
 		$wpdb->translations = $wpdb->prefix . 'icl_translations';
 
 		$posts = $wpdb->get_results("
@@ -89,6 +92,32 @@
 		OBJECT);	
 		
 	}
+
+	// no hits? try regular query posts
+	/*
+	if (!$posts) {
+
+		$posts = $wpdb->get_results("
+			SELECT DISTINCT(ID), post_title
+			FROM $wpdb->posts 
+			WHERE $wpdb->posts.post_type = '$post_type'
+			AND (
+				$wpdb->posts.post_status = 'publish'
+				OR $wpdb->posts.post_status = 'draft'
+			)
+			AND $wpdb->posts.ID NOT IN ($query_exclude) 
+			AND (
+				$wpdb->posts.post_title LIKE '%$query_search%'
+				OR $wpdb->posts.post_excerpt LIKE '%$query_search%'
+				OR $wpdb->posts.post_content LIKE '%$query_search%'
+			)
+			ORDER BY $wpdb->posts.post_title ASC
+			LIMIT 10
+			", 
+		OBJECT);	
+		
+	}
+	*/
 	
 	if ($posts) {
 		foreach ($posts as $item) {
