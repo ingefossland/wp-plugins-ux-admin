@@ -12,17 +12,28 @@ jQuery(document).ready(function($) {
 	// init
 	function ux_list_init(meta_id) {
 
-		// update
+		// initialize
+		console.log('initialize list items');
+		
+		// get rows
+		var rows = $('#'+meta_id+' .ux-list-row');
+		rows.each(function(i){
+			ux_list_item_init(meta_id, this);
+		});
+
 		ux_list_update(meta_id);
 
 		// add row
 		$('#'+meta_id+' .add').click(function() {
+
 			var row = $('#'+meta_id+' .ux-list-new  .ux-list-row').clone();
-			$('#'+meta_id+' .ux-list-rows').append(row);
-			ux_list_update(meta_id);
+			var new_row = $('#'+meta_id+' .ux-list-rows').append(row);
+
+			// initialize list item
+			ux_list_item_init(meta_id, new_row);
+
 			return false;
 		});
-
 
 		// make sortable and update on change
 		$('#'+meta_id+' .ux-list-rows').sortable({
@@ -38,8 +49,27 @@ jQuery(document).ready(function($) {
 
 	}
 	
+	function ux_list_item_init(meta_id, item) {
+
+		// update on change
+		$(item).find('input').change(function() {
+			ux_list_update(meta_id);
+			return false;
+		});
+
+		// make removeable
+		$(item).find('.remove').click(function() {
+			$(this).parent().parent().parent().remove();
+			ux_list_update(meta_id);
+			return false;
+		});	
+
+	}
+	
 	// update and sort list rows
 	function ux_list_update(meta_id) {
+
+		console.log('update list');
 		
 		// set posts array
 		var list = [];
@@ -60,18 +90,6 @@ jQuery(document).ready(function($) {
 			if (title) {
 				list.push('"'+title+'":"'+descr+'"');
 			}
-
-			// update on change
-			$('#'+row_id+' input').change(function() {
-				ux_list_update(meta_id);
-			});
-
-			// make removeable
-			$('#'+row_id+' .remove').click(function() {
-				$(this).parent().parent().parent().remove();
-				ux_list_update(meta_id);
-				return false;
-			});	
 
 		});
 
