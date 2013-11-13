@@ -14,7 +14,14 @@
 	
 	// query
 	$query_search = $_REQUEST['search'];
+
+	// query options
+	$query_scope = $_REQUEST['query_scope'];
 	
+	if (!$query_limit = $_REQUEST['query_limit']) {
+		$limit_query = 10;
+	}
+
 	// post type
 	$post_type = $_REQUEST['post_type'];
 
@@ -39,7 +46,21 @@
 	} else {
 		$query_exclude = $post_id; // exclude current id
 	}
+	
+	// query all or just title
 
+	if ($query_scope == 'all') {
+
+		$scope_query = "$wpdb->posts.post_title LIKE '%$query_search%'"
+			."OR $wpdb->posts.post_excerpt LIKE '%$query_search%'"
+			."OR $wpdb->posts.post_content LIKE '%$query_search%'";
+		
+	} else {
+
+		$scope_query = "$wpdb->posts.post_title LIKE '%$query_search%'";
+		
+	}
+		
 	// query posts for use with wpml
 	//if (ICL_LANGUAGE_CODE == 'en' || ICL_LANGUAGE_CODE == 'nb') {	
 	if ($post_language == 'nb') {
@@ -58,14 +79,12 @@
 			)
 			AND $wpdb->posts.ID NOT IN ($query_exclude) 
 			AND (
-				$wpdb->posts.post_title LIKE '%$query_search%'
-				OR $wpdb->posts.post_excerpt LIKE '%$query_search%'
-				OR $wpdb->posts.post_content LIKE '%$query_search%'
+				$scope_query
 			)
 			AND translations.element_type = 'post_$post_type'
 			AND translations.language_code != 'en'
 			ORDER BY $wpdb->posts.post_title ASC
-			LIMIT 10
+			LIMIT $limit_query
 			", 
 		OBJECT);	
 
@@ -82,12 +101,10 @@
 			)
 			AND $wpdb->posts.ID NOT IN ($query_exclude) 
 			AND (
-				$wpdb->posts.post_title LIKE '%$query_search%'
-				OR $wpdb->posts.post_excerpt LIKE '%$query_search%'
-				OR $wpdb->posts.post_content LIKE '%$query_search%'
+				$scope_query
 			)
 			ORDER BY $wpdb->posts.post_title ASC
-			LIMIT 10
+			LIMIT $limit_query
 			", 
 		OBJECT);	
 		

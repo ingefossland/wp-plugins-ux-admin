@@ -44,7 +44,7 @@ if ($settings_key) {
 
 <div class="ux-list" id="<?php echo $meta_id; ?>">
 
-<p><input type="text" name="<?php echo $meta_name; ?>" value="<?php echo htmlentities($meta_value); ?>" class="meta_value" /></p>
+<p><input type="hidden" name="<?php echo $meta_name; ?>" value="<?php echo htmlentities($meta_value); ?>" class="meta_value" /></p>
 
 <div class="ux-list-rows">
 <?php $rows = json_decode($meta_value, true); ?>

@@ -8,6 +8,10 @@ $this->add_template(array(
 	'meta_key' => 'example_pool',
 	'post_type' => 'post',
 	'post_lang' => 'en',
+	
+	// query options
+	'query_scope' => 'title|all',
+	'query_limit' => '10',
 
 	// make yer own stuff
 	'ajax_url' => 'wp-content/plugins/ux-admin/template/ux-pool-query.php',
@@ -27,6 +31,9 @@ $meta_value = get_post_meta($post_id, $meta_key, true);
 <?php } else { ?>
 <input type="hidden" name="ajax_url" value="<?php echo WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)) . '/ux-pool-query.php'; ?>" class="ajax_url" />
 <?php } ?>
+
+<input type="hidden" name="query_scope" value="<?php echo $query_scope; ?>" />
+<input type="hidden" name="query_limit" value="<?php echo $query_limit; ?>" />
 
 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>" />
 <input type="hidden" name="post_type" value="<?php echo $post_type; ?>" />
