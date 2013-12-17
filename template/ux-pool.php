@@ -7,7 +7,7 @@ $this->add_template(array(
 	'post_id' => $post->ID,
 	'meta_key' => 'example_pool',
 	'post_type' => 'post',
-	'post_lang' => 'en',
+	'post_language' => 'en',
 	
 	// query options
 	'query_scope' => 'title|all',

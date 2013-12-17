@@ -88,6 +88,31 @@
 			", 
 		OBJECT);	
 
+	} else if ($post_language == 'en') {
+		$wpdb->translations = $wpdb->prefix . 'icl_translations';
+
+		$posts = $wpdb->get_results("
+			SELECT DISTINCT(ID), post_title
+			FROM $wpdb->posts 
+			LEFT JOIN $wpdb->translations AS translations ON (
+				$wpdb->posts.ID = translations.element_id
+			)
+			WHERE $wpdb->posts.post_type = '$post_type'
+			AND (
+				$wpdb->posts.post_status = 'publish'
+				OR $wpdb->posts.post_status = 'draft'
+			)
+			AND $wpdb->posts.ID NOT IN ($query_exclude) 
+			AND (
+				$scope_query
+			)
+			AND translations.element_type = 'post_$post_type'
+			AND translations.language_code != 'nb'
+			ORDER BY $wpdb->posts.post_title ASC
+			LIMIT $limit_query
+			", 
+		OBJECT);	
+
 	// regular query posts
 	} else {
 
