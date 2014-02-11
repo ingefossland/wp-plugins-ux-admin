@@ -136,7 +136,6 @@
 	}
 
 	// no hits? try regular query posts
-	/*
 	if (!$posts) {
 
 		$posts = $wpdb->get_results("
@@ -149,17 +148,14 @@
 			)
 			AND $wpdb->posts.ID NOT IN ($query_exclude) 
 			AND (
-				$wpdb->posts.post_title LIKE '%$query_search%'
-				OR $wpdb->posts.post_excerpt LIKE '%$query_search%'
-				OR $wpdb->posts.post_content LIKE '%$query_search%'
+				$scope_query
 			)
 			ORDER BY $wpdb->posts.post_title ASC
-			LIMIT 10
+			LIMIT $limit_query
 			", 
 		OBJECT);	
 		
 	}
-	*/
 	
 	if ($posts) {
 		foreach ($posts as $item) {
